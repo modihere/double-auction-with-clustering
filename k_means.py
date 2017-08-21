@@ -35,9 +35,9 @@ def main():
         #pointfile.write(str(points[i])+" "+str(prices[i])+" "+str(arrival_time[i])+" "+str(departure_time[i])+"\n")
 
     #generate the buyer list in another text file with their budget.
-        prices=[random.randint(30,45) for i in range(num_clusters)]
+        prices=[random.randint(20,35) for i in range(10)]
     f=open("buyer.txt","w")
-    for i in range (num_clusters):
+    for i in range (10):
         f.write(str(prices[i])+"\n")
 
 
