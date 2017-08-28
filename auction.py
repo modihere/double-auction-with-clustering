@@ -1,9 +1,14 @@
 import re
-#from k_means import *
+from k_means import *
 def takeThirdandFourth(e):
-    return e[2],e[3]
-def pricecalculator():    
-	#main()
+    return e[2],e[4],e[5]
+def takefirst(e):
+	return e[0]
+
+def pricecalculator():
+	main()
+	time_slot_starting=[10,11,13,14,15]
+	time_slot_ending=[11,13,14,15,16]
 	sellerdata=list()
 	buyerdata=list()
 	sellerprice=list()
@@ -19,7 +24,7 @@ def pricecalculator():
 		sellerdata[j] = re.findall(r"[-+]?\d*\.\d+|\d+",line)
 		j+=1
 	for sell in range (j):
-		for sell1 in range(2,5):
+		for sell1 in range(2,6):
 			sellerdata[sell][sell1]=int(sellerdata[sell][sell1])
 	sellerdata.sort(key=takeThirdandFourth)
 	for sell in sellerdata:
@@ -31,12 +36,12 @@ def pricecalculator():
 
 	buyercounter=0
 	for line in buyer:
-		buyerdata.append([int(k) for k in line.split()])
+		buyerdata.append([])
+		buyerdata[buyercounter]=[int(k) for k in line.split()]
 		buyercounter+=1
-	buyerdata.sort(reverse=True)
+	buyerdata.sort(key=takefirst,reverse=True)
 	print("\nthe price offered by the buyers in descending order are: \n")
-	for m in range (buyercounter):
-		print (buyerdata[m][0])
+	print (buyerdata)
 
 	#keep the seller price of each seller of each cluster in sellerprice list.
 	for size in range (cluster):

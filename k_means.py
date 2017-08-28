@@ -31,19 +31,20 @@ def main():
     #arrival_time=[random.randint(1,21) for i in range(num_points)]
     #departure_time=[arrival_time[i]+random.randint(1,3) for i in range(num_points)]
     pointfile=open("pointer.txt","w")
-    for i in range (num_points):
+    #for i in range (num_points):
         #pointfile.write(str(points[i])+" "+str(prices[i])+" "+str(arrival_time[i])+" "+str(departure_time[i])+"\n")
 
     #generate the buyer list in another text file with their budget.
-        prices=[random.randint(20,35) for i in range(10)]
+    prices=[random.randint(20,35) for i in range(10)]
     f=open("buyer.txt","w")
     for i in range (10):
-        f.write(str(prices[i])+"\n")
+        f.write(str(prices[i])+" "+str(i)+"\n")
 
 
     # Cluster those data!
     clusters = kmeans(points, num_clusters, cutoff)
-
+    #identify the agents
+    agent_no=0
     # Print our clusters
     for i, c in enumerate(clusters):
         for p in c.points:
@@ -51,7 +52,8 @@ def main():
             prices=random.randint(10,num_points)
             arrival_time=random.randint(1,21)
             departure_time=arrival_time+random.randint(1,3)
-            pointfile.write(str(p)+" "+str(i)+" "+str(prices)+" "+str(arrival_time)+" "+str(departure_time)+"\n")
+            agent_no+=1
+            pointfile.write(str(p)+" "+str(i)+" "+str(prices)+" "+str(arrival_time)+" "+str(departure_time)+" "+str(agent_no)+"\n")
     # Display clusters using plotly for 2d data
     print("data written in file for more usage. Do you want to see the plot of the data?\n")
     inp=input('')
