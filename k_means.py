@@ -50,7 +50,7 @@ def main():
         for p in c.points:
             print (" Cluster: ", i, "\t Point :", p)
             prices=random.randint(10,num_points)
-            arrival_time=random.randint(1,21)
+            arrival_time=random.randint(10,15)
             departure_time=arrival_time+random.randint(1,3)
             agent_no+=1
             pointfile.write(str(p)+" "+str(i)+" "+str(prices)+" "+str(arrival_time)+" "+str(departure_time)+" "+str(agent_no)+"\n")

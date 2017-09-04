@@ -1,35 +1,12 @@
 import re
-#from k_means import *
+from k_means import *
 def takeThirdandFourth(e):
     return e[2],e[4],e[5]
 def takefirst(e):
 	return e[0]
 
-#payment function:
-def allocation(sellerprice,buyerdata):
-
-def payment(sellerprice,buyerdata):
-	newsellerdata=list()
-	newbuyerdata=list()
-	#considering no misinterpretion of time
-	variable=
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 def pricecalculator():
-	#main()
+	main()
 	time_slot=[10,11,13,14,15,17]
 	activeagents=list()
 	sellerdata=list()
