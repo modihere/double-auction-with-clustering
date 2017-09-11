@@ -1,12 +1,16 @@
 import re
-#from k_means import *
+from k_means import *
 def takeThirdandFourth(e):
     return e[2],e[4],e[5]
 def takefirst(e):
 	return e[0]
 
+f=open("seller_coordinates.txt","w")
+
 def allocator(sellerdata,time_slot,cluster,j,buyerdata):#the counter takes the number of element in each cluster
 	sellprice=list()
+	sellerx1=list()
+	sellery1=list()
 	buyprice=list()
 	count=0
 	#take the buyer prices
@@ -24,17 +28,27 @@ def allocator(sellerdata,time_slot,cluster,j,buyerdata):#the counter takes the n
 				if sellerdata[k][2]==size:
 					if sellerdata[k][4]<=time_slot[i] and sellerdata[k][4]>time_slot[i-1]:
 						sellprice.insert(count,sellerdata[k][3])
+						sellerx1.insert(count,sellerdata[k][0])
+						sellery1.insert(count,sellerdata[k][1])
 						count+=1
-			#write the double auction code within this indentation maybe using a different function.
+
+			sellerx=[x for _,x in sorted(zip(sellprice,sellerx1))]
+			sellery=[x for _,x in sorted(zip(sellprice,sellery1))]
 			sellprice.sort()
 			print (sellprice)
-			doubleauction(sellprice,buyprice)
+			print (sellerx)
+			print (sellery)
+			doubleauction(sellprice,buyprice,sellerx,sellery)
 			del sellprice[:]
+			del sellery[:]
+			del sellerx[:]
 
 
-def doubleauction(sellprice,buyprice):
+def doubleauction(sellprice,buyprice,sellerx,sellery):
 	newsellprice=list()
 	newbuyprice=list()
+	newsellerx=list()
+	newsellery=list()
 	count=0
 	newcount=0
 	breakindex=0
@@ -62,11 +76,11 @@ def doubleauction(sellprice,buyprice):
 			newsellprice.insert(0,0)
 			count+=1
 			print(newsellprice)
-		else:
+		else:#when number of elements is less than or equal to 2.
 			for i in range(breakindex):
 				newsellprice.append(sellprice[i])
 				count+=1
-			newsellprice.append(sellprice[breakindex])#taking the extra element for removal of elements while applying the algo.
+			newsellprice.append(sellprice[breakindex])
 			print(newsellprice)
 
 		for k in range(breakindex+1):
@@ -134,7 +148,8 @@ def doubleauction(sellprice,buyprice):
 			if k<breakindex or breakindex==length-1:
 				print(newsellprice)
 				avgprice=(newbuyprice[newcount]+newsellprice[count])/2
-				print(" the price for the seller with",sellprice[k],"will receive",avgprice)
+				f.write(str(sellerx[k])+" "+str(sellery[k])+"\n")
+				print(" the price for the seller with",sellprice[k],"and coordinates",sellerx[k]," ",sellery[k],"will receive",avgprice)
 			del newsellprice[:]
 			newcount=0
 		count=0
@@ -239,7 +254,8 @@ def doubleauction(sellprice,buyprice):
 			if k<breakindex or breakindex==length-1:
 				print(newsellprice)
 				avgprice=(newbuyprice[newcount]+newsellprice[count])/2
-				print(" the price for the seller with",sellprice[k],"will receive",avgprice)
+				f.write(str(sellerx[k])+" "+str(sellery[k])+"\n")
+				print(" the price for the seller with",sellprice[k],"and coordinates",sellerx[k]," ",sellery[k],"will receive",avgprice)
 			del newsellprice[:]
 			newcount=0
 		count=0
@@ -250,14 +266,14 @@ def doubleauction(sellprice,buyprice):
 
 					
 def pricecalculator():
-	#main()
+	main()
 	time_slot=[8,10,13,15,17]
 	#activeagents=list()
 	sellerdata=list()
 	buyerdata=list()
 	#sellerprice=list()
 	#avgbuysell=list()
-	cluster=5 #num_clusters
+	cluster=num_clusters
 	seller=open("pointer.txt","r")
 	buyer=open("buyer.txt","r")
 
@@ -303,3 +319,4 @@ def pricecalculator():
 	
 	allocator(sellerdata,time_slot,cluster,j,buyerdata)
 pricecalculator()
+f.close()
