@@ -1,5 +1,5 @@
 import math
-from k_means import *
+from step_0 import *
 f=open("seller_coordinates.txt","r")
 f1=open("plotter.txt","a+")
 def calc():

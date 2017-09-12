@@ -1,5 +1,5 @@
 import re
-from k_means import *
+from step_0 import *
 def takeThirdandFourth(e):
     return e[2],e[4],e[5]
 def takefirst(e):

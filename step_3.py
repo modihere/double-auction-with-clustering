@@ -20,9 +20,9 @@ def plotter():
 	gp1('set ylabel "y-axis"')
 	gp1('set xrange [0:10]')
 	gp1('set yrange [0:100000]')
-	plot1 = Gnuplot.PlotItems.Data(data1, with_="boxes" ,title='best allocation ')
+	plot1 = Gnuplot.PlotItems.Data(data1, with_="boxes" ,title='total distance')
 	gp1.plot(plot1)
-	epsFilename ='t.eps'
+	epsFilename ='distance.eps'
 	gp1.hardcopy(epsFilename, terminal = 'postscript',color=1)
 	gp1.reset()
 plotter()
