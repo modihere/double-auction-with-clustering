@@ -30,9 +30,8 @@ def main():
     #arrival_time=[random.randint(1,21) for i in range(num_points)]
     #departure_time=[arrival_time[i]+random.randint(1,3) for i in range(num_points)]
     pointfile=open("pointer.txt","w")
-    #for i in range (num_points):
-        #pointfile.write(str(points[i])+" "+str(prices[i])+" "+str(arrival_time[i])+" "+str(departure_time[i])+"\n")
-
+    new_pointfile=open("pointer_new.txt","w")
+    
     #generate the buyer list in another text file with their budget.
     prices=[random.randint(30,45) for i in range(10)]
     f=open("buyer.txt","w")
@@ -53,14 +52,16 @@ def main():
             departure_time=arrival_time+random.randint(1,3)
             agent_no+=1
             pointfile.write(str(p)+" "+str(i)+" "+str(prices)+" "+str(arrival_time)+" "+str(departure_time)+" "+str(agent_no)+"\n")
+            new_pointfile.write(str(p)+" "+str(prices)+" "+str(arrival_time)+" "+str(departure_time)+" "+str(agent_no)+"\n")
+    new_pointfile.close()
     # Display clusters using plotly for 2d data
-    print("data written in file for more usage. Do you want to see the plot of the data?\n")
-    inp=input('')
-    if dimensions in [2, 3] and plotly and inp=='y':
+    #print("data written in file for more usage. Do you want to see the plot of the data?\n")
+    '''if dimensions in [2, 3] and plotly:
         print ("Plotting points, launching browser ...")
         plotClusters(clusters, dimensions)
     else:
         return
+        '''
 
 class Point(object):
     '''

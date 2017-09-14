@@ -1,8 +1,9 @@
 import math
 from step_0 import *
-f=open("seller_coordinates.txt","r")
-f1=open("plotter.txt","a+")
+
 def calc():
+	f=open("seller_coordinates.txt","r")
+	f1=open("plotter.txt","a+")
 	coordinates=list()
 	coordinate_sum=0
 	j=0
@@ -19,7 +20,7 @@ def calc():
 			coordinate_sum+=dist
 			
 	print(coordinate_sum)
-	f1.write(str(num_clusters)+" "+str(coordinate_sum)+"\n")
-calc()
-f.close()
-f1.close()
+	f1.write(str(coordinate_sum)+"\n")
+#calc()
+	f.close()
+	f1.close()
