@@ -22,7 +22,7 @@ def allocator(sellerdata,time_slot,j,buyerdata):#the counter takes the number of
 		print("\nIN THE TIME SLOT OF",time_slot[i],": 00 HOURS\n")
 		count=0
 		for k in range (j):
-			if sellerdata[k][4]<=time_slot[i] and sellerdata[k][4]>time_slot[i-1]:
+			if sellerdata[k][4]<=time_slot[i] and sellerdata[k][4]>=time_slot[i-1]:
 				sellprice.insert(count,sellerdata[k][3])
 				sellerx1.insert(count,sellerdata[k][0])
 				sellery1.insert(count,sellerdata[k][1])
