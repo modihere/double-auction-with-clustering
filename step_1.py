@@ -7,6 +7,8 @@ def takeThirdandFourth(e):
 def takefirst(e):
 	return e[0]
 
+total_seller_pay=0
+total_buyer_pay=0
 
 
 def allocator(sellerdata,time_slot,cluster,j,buyerdata):#the counter takes the number of element in each cluster
@@ -24,12 +26,12 @@ def allocator(sellerdata,time_slot,cluster,j,buyerdata):#the counter takes the n
 	for size in range (cluster):
 		print("\nFOR CLUSTER ", size)
 		
-		for i in range (1,4):
+		for i in range (0,4):
 			print("\nIN THE TIME SLOT OF",time_slot[i],": 00 HOURS\n")
 			count=0
 			for k in range (j):
 				if sellerdata[k][2]==size:
-					if sellerdata[k][4]<=time_slot[i] and sellerdata[k][4]>time_slot[i-1]:
+					if sellerdata[k][5]<=time_slot[4] and sellerdata[k][4]>=time_slot[i]:
 						sellprice.insert(count,sellerdata[k][3])
 						sellerx1.insert(count,sellerdata[k][0])
 						sellery1.insert(count,sellerdata[k][1])
@@ -57,6 +59,8 @@ def doubleauction(sellprice,buyprice,sellerx,sellery,f):
 	count=0
 	newcount=0
 	breakindex=0
+	global total_seller_pay
+	global total_buyer_pay
 	#if number of sellers are less than the number of buyers.
 	if len(sellprice)<= len(buyprice):
 		print("\nIN IF PART\n")
@@ -109,6 +113,7 @@ def doubleauction(sellprice,buyprice,sellerx,sellery,f):
 				print(newbuyprice)
 				avgprice=(newbuyprice[newcount]+newsellprice[count])/2
 				print(" the price for the buyer with",buyprice[k],"has to pay",avgprice)
+				total_buyer_pay+=avgprice
 			del newbuyprice[:]
 			newcount=0
 		count=0
@@ -155,6 +160,7 @@ def doubleauction(sellprice,buyprice,sellerx,sellery,f):
 				avgprice=(newbuyprice[newcount]+newsellprice[count])/2
 				f.write(str(sellerx[k])+" "+str(sellery[k])+"\n")
 				print(" the price for the seller with",sellprice[k],"and coordinates",sellerx[k]," ",sellery[k],"will receive",avgprice)
+				total_seller_pay+=avgprice
 			del newsellprice[:]
 			newcount=0
 		count=0
@@ -215,6 +221,7 @@ def doubleauction(sellprice,buyprice,sellerx,sellery,f):
 				print(newbuyprice)
 				avgprice=(newbuyprice[newcount]+newsellprice[count])/2
 				print(" the price for the buyer with",buyprice[k],"has to pay",avgprice)
+				total_buyer_pay+=avgprice
 			del newbuyprice[:]
 			newcount=0
 		count=0
@@ -261,6 +268,7 @@ def doubleauction(sellprice,buyprice,sellerx,sellery,f):
 				avgprice=(newbuyprice[newcount]+newsellprice[count])/2
 				f.write(str(sellerx[k])+" "+str(sellery[k])+"\n")
 				print(" the price for the seller with",sellprice[k],"and coordinates",sellerx[k]," ",sellery[k],"will receive",avgprice)
+				total_seller_pay+=avgprice			
 			del newsellprice[:]
 			newcount=0
 		count=0
@@ -272,7 +280,7 @@ def doubleauction(sellprice,buyprice,sellerx,sellery,f):
 					
 def pricecalculator():
 	
-	time_slot=[8,10,13,15,17]
+	time_slot=[10,12,13,15,17]
 	#activeagents=list()
 	
 	#sellerprice=list()
@@ -328,3 +336,6 @@ def pricecalculator():
 		seller.close()
 		buyer.close()
 pricecalculator()
+f1=open("paycalc.txt","w")
+f1.write(str(num_clusters)+" "+str(total_buyer_pay)+" "+str(total_seller_pay)+"\n")
+f1.close()

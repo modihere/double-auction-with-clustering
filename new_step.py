@@ -6,7 +6,7 @@ def takefirst(e):
 	return e[0]
 
 
-def allocator(sellerdata,time_slot,j,buyerdata):#the counter takes the number of element in each cluster
+def allocator(sellerdata,time_slot,j,buyerdata):
 	sellprice=list()
 	sellerx1=list()
 	sellery1=list()
@@ -18,11 +18,11 @@ def allocator(sellerdata,time_slot,j,buyerdata):#the counter takes the number of
 		buyprice.append(buyerdata[i][0])
 	print (buyprice)
 	#take the seller prices
-	for i in range (1,4):
+	for i in range (0,4):
 		print("\nIN THE TIME SLOT OF",time_slot[i],": 00 HOURS\n")
 		count=0
 		for k in range (j):
-			if sellerdata[k][4]<=time_slot[i] and sellerdata[k][4]>=time_slot[i-1]:
+			if sellerdata[k][5]<=time_slot[4] and sellerdata[k][4]>=time_slot[i]:
 				sellprice.insert(count,sellerdata[k][3])
 				sellerx1.insert(count,sellerdata[k][0])
 				sellery1.insert(count,sellerdata[k][1])
@@ -263,7 +263,7 @@ def doubleauction(sellprice,buyprice,sellerx,sellery,f):
 
 
 
-time_slot=[8,10,13,15,17]
+time_slot=[10,12,13,15,17]
 
 
 for i in range (1000):
